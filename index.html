@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Программа наставничества | Alumni Connect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #345785;
+            --accent: #ff9e1b;
+            --light: #f8f9fc;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f9fc 0%, #e9ecef 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            background-attachment: fixed;
+        }
+        
+        .main-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .main-header::before {
+            content: "∞";
+            position: absolute;
+            font-size: 320px;
+            font-weight: 800;
+            opacity: 0.05;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            line-height: 1;
+        }
+        
+        .header-logo {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 15px;
+        }
+        
+        .header-logo .icon {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header-logo .text {
+            font-size: 1.8rem;
+            margin-top: 5px;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+        
+        .main-header h1 {
+            font-size: 2.5rem;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        .main-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            color: var(--secondary);
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(74, 111, 165, 0.25);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 111, 165, 0.4);
+        }
+        
+        .about-program {
+            background-color: white;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin: 40px 0;
+        }
+        
+        .program-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .program-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            border-top: 4px solid var(--accent);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .program-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .program-card .icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .program-card:hover .icon {
+            transform: scale(1.1);
+            color: var(--accent);
+        }
+        
+        .mentors {
+            position: relative;
+        }
+        
+        .mentor-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .mentor-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            position: relative;
+            border-top: 5px solid var(--primary);
+        }
+        
+        .mentor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .mentor-image {
+            height: 300px;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mentor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .mentor-card:hover .mentor-image img {
+            transform: scale(1.04);
+        }
+        
+        
+        .mentor-info {
+    
+            padding: 25px;
+        }
+        
+
+        
+        .mentor-school {
+            display: block;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .mentor-achievements {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: block;
+            font-size: 0.95rem;
+        }
+        
+        .mentor-skills {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background: #e9ecef;
+            padding: 7px 14px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+        
+        .mentor-card:hover .skill-tag {
+            background: #dde5f0;
+        }
+        
+        .become-mentor {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            border-radius: 15px;
+            padding: 60px;
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .become-mentor::before {
+            content: "∞";
+            position: absolute;
+            font-size: 300px;
+            font-weight: 800;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+            color: var(--accent);
+        }
+        
+        .mentor-benefits {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 25px;
+            width: 280px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .benefit-card .icon {
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+        
+        .benefit-card:hover .icon {
+            transform: scale(1.1);
+        }
+        
+        .main-footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-footer::before {
+            content: "∞";
+            position: absolute;
+            font-size: 300px;
+            font-weight: 800;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+            color: var(--accent);
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 992px) {
+            .main-header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .become-mentor {
+                padding: 40px 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-logo .icon {
+                font-size: 4rem;
+            }
+            
+            .header-logo .text {
+                font-size: 1.5rem;
+            }
+            
+            .program-points,
+            .mentor-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-program {
+                padding: 30px 20px;
+            }
+            
+            .contact-item {
+                font-size: 1rem;
+            }
+        }
+        
+        .mentor-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 35px;
+            margin-bottom: 40px;
+            justify-content: center;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 250px;
+            position: relative;
+            flex-grow: 1;
+        }
+        
+        .filter-label {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .filter-label i {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        .search-wrapper {
+            position: relative;
+        }
+        
+        .search-input {
+            padding: 14px 20px;
+            padding-right: 50px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            width: 100%;
+            transition: var(--transition);
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 3px 12px rgba(74, 111, 165, 0.15);
+            outline: none;
+        }
+        
+        .search-wrapper i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .filter-select {
+            padding: 14px 20px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            width: 100%;
+            transition: var(--transition);
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a6fa5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 16px;
+        }
+        
+        .filter-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 3px 12px rgba(74, 111, 165, 0.15);
+            outline: none;
+        }
+        
+        .mentor-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 7px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .status-open {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .status-closed {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .mentor-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn-details {
+            background: var(--accent);
+            color: #212529;
+            border: none;
+            flex-grow: 1;
+            text-align: center;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 158, 27, 0.25);
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-details:hover {
+            background: #e08c00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(255, 158, 27, 0.35);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(3px);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            width: 80%;
+            max-width: 700px;
+            position: relative;
+            animation: modalopen 0.4s;
+            border-top: 5px solid var(--accent);
+        }
+        
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: var(--primary);
+            background: #f5f5f5;
+            text-decoration: none;
+        }
+        
+        .modal-mentor-info {
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+        
+        .modal-mentor-info p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .modal-mentor-info ul {
+            margin: 20px 0 30px 0;
+            list-style: none;
+        }
+        
+        .modal-mentor-info li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.05rem;
+        }
+        
+        .modal-mentor-info li:before {
+            content: "•";
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-size: 2rem;
+            line-height: 1;
+            top: -5px;
+        }
+        
+        .modal-mentor-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 25px 0;
+        }
+        
+        .modal-register-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .modal-status {
+            display: inline-block;
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .mentor-card {
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        
+        .mentor-card.hidden {
+            transform: scale(0.9);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, var(--light) 0%, #e9ecef 100%);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .stat-item {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            min-width: 200px;
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-logo">
+                <div class="icon"><i class="fas fa-hands-helping"></i></div>
+                <div class="text">Alumni Connect</div>
+            </div>
+            <h1>Программа наставничества</h1>
+            <p>Выпускники помогают ученикам достигать академических высот</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="stats-section">
+            <h2 class="section-title">Наш старт</h2>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Активных наставников</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2025</span>
+                    <span class="stat-label">Год запуска</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Возможностей</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <h2 class="section-title">О нашей программе</h2>
+            
+            <div class="about-program">
+                <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">
+                    Программа менторства создана для связи успешных выпускников с нынешними учениками. 
+                    Наша миссия - передача знаний, опыта и вдохновения для достижения академических успехов.
+                </p>
+                
+                <div class="program-points">
+                    <div class="program-card">
+                        <div class="icon"><i class="fas fa-trophy"></i></div>
+                        <h3>Подготовка к олимпиадам</h3>
+                        <p>Помощь в формировании стратегии подготовки к ВсОШ и перечневым олимпиадам от призёров и победителей.                        </p>
+                    </div>
+                    
+                    <div class="program-card">
+                        <div class="icon"><i class="fas fa-flask"></i></div>
+                        <h3>Проекты</h3>
+                        <p>Помочь с идеей или советом по твоему исследовательскому проекту. От первого шага до выступления на конференции.</p>
+                    </div>
+                    
+                    <div class="program-card">
+                        <div class="icon"><i class="fas fa-briefcase"></i></div>
+                        <h3>Профориентация</h3>
+                        <p>Помощь в выборе вуза и специальности от студентов ведущих университетов</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mentors">
+            <h2 class="section-title">Наши наставники</h2>
+            
+            <div class="mentor-filters">
+                <div class="filter-group">
+                    <label class="filter-label">
+                        <i class="fas fa-search"></i> Поиск по ключевым словам
+                    </label>
+                    <div class="search-wrapper">
+                        <input type="text" class="search-input" id="skill-search" placeholder="Физика, программирование...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label class="filter-label">
+                        <i class="fas fa-user-check"></i> Статус набора
+                    </label>
+                    <select class="filter-select" id="status-filter">
+                        <option value="all">Все наставники</option>
+                        <option value="open">Набор открыт</option>
+                        <option value="closed">Набор закрыт</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="mentor-gallery">
+                <div class="mentor-card" data-status="open" data-skills="россия физика олимпиады мфти поступление егэ">
+                    <div class="mentor-status status-open">Набор открыт</div>
+                    <div class="mentor-image">
+                        <img src="https://systematika.org/wp-content/uploads/2025/05/photo_2025-04-22_16-58-39.jpg" alt="Владислав Козьминых">
+                    </div>
+                    <div class="mentor-info">
+                        <span class="mentor-school">Выпускник 2024 года</span>
+                        <h3>Владислав Козьминых</h3>
+                        <span class="mentor-achievements">МФТИ, 2 курс | РсОШ по физике</span>
+                        <p>Помогу с выбором тактики подготовки к олимпиадам, расскажу о поступлении.</p>
+                        <div class="mentor-skills">
+                            <span class="skill-tag">Физика</span>
+                            <span class="skill-tag">Олимпиады</span>
+                            <span class="skill-tag">МФТИ</span>
+                            <span class="skill-tag">Поступление</span>
+                            <span class="skill-tag">ЕГЭ</span>
+                            <span class="skill-tag">Стартап</span>
+                        </div>
+                        <div class="mentor-actions">
+                            <button class="btn-details" onclick="openModal('modal-mentor1')">
+                                <i class="fas fa-user-circle"></i> Узнать больше
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-card" data-status="open" data-skills="мфти физика олимпиады проектная деятельность">
+                    <div class="mentor-status status-open">Набор открыт</div>
+                    <div class="mentor-image">
+                        <img src="https://sun9-69.userapi.com/s/v1/ig2/qKJOujnzVw4DUDxZnZTYSj-wXMfWA606ud0k7MKOsqun8MrDA1AwkQsEI_kZZgmM_qNgh8Mj4W4yC9onU-RLm91u.jpg?quality=96&as=32x35,48x53,72x80,108x120,160x177,240x266,360x399,480x532,540x599,640x710,695x771&from=bu&cs=695x0" alt="Екатерина Авдохина">
+                    </div>
+                    <div class="mentor-info">
+                        <span class="mentor-school">Выпускница 2023 года</span>
+                        <h3>Екатерина Авдохина</h3>
+                        <span class="mentor-achievements">МФТИ, 2 курс | Теорфиз</span>
+                        <p>Помогу с исследовательскими проектами и выбором вуза</p>
+                        <div class="mentor-skills">
+                            <span class="skill-tag">МФТИ</span>
+                            <span class="skill-tag">Физика</span>
+                            <span class="skill-tag">Олимпиады</span>
+                            <span class="skill-tag">Проектная деятельность</span>
+                        </div>
+                        <div class="mentor-actions">
+                            <button class="btn-details" onclick="openModal('modal-mentor2')">
+                                <i class="fas fa-user-circle"></i> Узнать больше
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-card" data-status="open" data-skills="мфти математика физика поступление успех">
+                    <div class="mentor-status status-open">Набор открыт</div>
+                    <div class="mentor-image">
+                        <img src="https://sun9-74.userapi.com/s/v1/ig2/HU3a9kmzes_pK_aAxSnU9-7SRrb1W15IZhZW9GhkjDsxdvbCtEUJ816rGmrXelnjtBYoh5x1pjwyaaSJV6pHG5NF.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x319,360x479,480x639,540x718,640x852,720x958,962x1280&from=bu&cs=962x0" alt="Глеб Смирнов">
+                    </div>
+                    <div class="mentor-info">
+                        <span class="mentor-school">Выпускник 2024 года</span>
+                        <h3>Глеб Смирнов</h3>
+                        <span class="mentor-achievements">МФТИ, 2 курс | РСОШ по математике</span>
+                        <p>Проложу тропу неминуемого успеха на пути к осязательным результатам</p>
+                        <div class="mentor-skills">
+                            <span class="skill-tag">Физика</span>
+                            <span class="skill-tag">Математика</span>
+                            <span class="skill-tag">Перечни</span>
+                            <span class="skill-tag">Успех</span>
+                            <span class="skill-tag">МФТИ</span>
+                        </div>
+                        <div class="mentor-actions">
+                            <button class="btn-details" onclick="openModal('modal-mentor3')">
+                                <i class="fas fa-user-circle"></i> Узнать больше
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-card" data-status="open" data-skills="мгу мехмат математика поступление механика">
+                    <div class="mentor-status status-open">Набор открыт</div>
+                    <div class="mentor-image">
+                        <img src="https://psv4.userapi.com/s/v1/d2/sqH5wbHpi3-cukDf2Nsnnjc_-AGp6OE8C7dYKxRxKRU-pTbzqSJnS-3T_ak4bnyRX3p7HyQv-d4Oef4771mnASLvnu5V8M58lPYTSuJYoaYdJg3QG0gH_YSfLSVd3QM1BjZ7Dsg1kge9/Kok.jpg" alt="Сергей Кокушев">
+                    </div>
+                    <div class="mentor-info">
+                        <span class="mentor-school">Выпускник 2024 года</span>
+                        <h3>Сергей Кокушев</h3>
+                        <span class="mentor-achievements">МГУ, 2 курс | РСОШ по физике</span>
+                        <p>Расскажу о поступлении и обучении на Мехмате МГУ</p>
+                        <div class="mentor-skills">
+                            <span class="skill-tag">МГУ</span>
+                            <span class="skill-tag">Мехмат</span>
+                            <span class="skill-tag">Математика</span>
+                            <span class="skill-tag">Поступление</span>
+                            <span class="skill-tag">Механика</span>
+                            <span class="skill-tag">РСОШ</span>
+                            <span class="skill-tag">Стартап</span>
+                        </div>
+                        <div class="mentor-actions">
+                            <button class="btn-details" onclick="openModal('modal-mentor4')">
+                                <i class="fas fa-user-circle"></i> Узнать больше
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-card" data-status="open" data-skills="биология поступление пмгму психология">
+                    <div class="mentor-status status-open">Набор открыт</div>
+                    <div class="mentor-image">
+                        <img src="https://sun9-54.userapi.com/s/v1/ig2/K9rgGRxOVa9XPrqm-ojCvW1HJjlYVZlP8e6PidFZ3sLgmVlgRx2K79cPiS_xaJIBEnYoo-P79ZACxNceEWcb69n4.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640&from=bu&cs=640x0" alt="Анастасия Кирюшина">
+                    </div>
+                    <div class="mentor-info">
+                        <span class="mentor-school">Выпускница 2024 года</span>
+                        <h3>Анастасия Кирюшина</h3>
+                        <span class="mentor-achievements">Сеченовский университет 2 курс| Венский университет 1 курс</span>
+                        <p>Помогу определиться с родом деятельности, расскажу про поступление в Австрию</p>
+                        <div class="mentor-skills">
+                            <span class="skill-tag">Биология</span>
+                            <span class="skill-tag">Поступление</span>
+                            <span class="skill-tag">ПМГМУ</span>
+                            <span class="skill-tag">Психология</span>
+                        </div>
+                        <div class="mentor-actions">
+                            <button class="btn-details" onclick="openModal('modal-mentor5')">
+                                <i class="fas fa-user-circle"></i> Узнать больше
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="become-mentor-section">
+            <div class="become-mentor">
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Стать частью сообщества</h2>
+                <p style="font-size: 1.3rem; max-width: 800px; margin: 0 auto 30px;">
+                    Выпускник? Присоединяйтесь к сообществу наставников и помогите следующему поколению учеников достичь успеха!
+                </p>
+                
+                <div class="mentor-benefits">
+                    <div class="benefit-card">
+                        <div class="icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Расширьте сеть контактов</h3>
+                        <p>Знакомство с талантливыми учениками и другими выпускниками</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Развивайте навыки</h3>
+                        <p>Улучшайте коммуникативные и менторские способности</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <div class="icon"><i class="fas fa-heart"></i></div>
+                        <h3>Поделитесь опытом</h3>
+                        <p>Помогите другим как когда-то помогли вам</p>
+                    </div>
+                </div>
+                
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScYOd8QYw7TpjeK7NYpweIRX1vZU4Jv1uejmgbe3RUZOgpzpg/viewform?usp=dialog" class="btn" style="background: var(--accent); color: #212529; font-size: 1.2rem; padding: 16px 40px;">
+                    <i class="fas fa-user-plus"></i> Присоединиться к программе
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="header-logo" style="margin-bottom: 30px;">
+                    <div class="icon" style="color: var(--accent);"><i class="fas fa-hands-helping"></i></div>
+                    <div class="text">Alumni Connect</div>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fab fa-telegram"></i></span>
+                        <span>Telegram: <a href="https://t.me/mentor_in_school" style="color: var(--accent);">@mentor_in_school</a></span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                        <span>Email: <a href="mailto:kozminyhv24@sch57.ru" style="color: var(--accent);">connect@alumni-program.ru</a></span>
+                    </div>
+                </div>
+                
+                <p class="copyright">© 2025 Программа наставничества Alumni Connect. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальные окна -->
+    <div id="modal-mentor1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-mentor1')">&times;</span>
+            <h3>Владислав Козьминых</h3>
+            <div class="modal-mentor-info">
+                <div class="modal-status status-open">Набор открыт</div>
+                <p><strong>Выпускник:</strong> 2024 года</p>
+                <p><strong>Образование:</strong> МФТИ, 2 курс ЛФИ</p>
+                <p><strong>Достижения:</strong> РсОШ по физике</p>
+                
+                <p>Привет! Я студент МФТИ, специализируюсь на физике. В школе активно участвовал в олимпиадах и знаю, как готовиться к ним. Преподавал практическую и теоретическую физику на выездных сборах, проверял регион по физике. Помогу вам:</p>
+                <ul>
+                    <li>Определится со стратегией подготовки к олимпиадам и поступлением</li>
+                    <li>Разобрать тему по физике</li>
+                    <li>Если Вам интересна педагогика, то поделюсь своим путем в преподавании</li>
+                    <li>Сориентироваться в студенческой жизни, советы абитуриентам</li>
+                    <li>Если у вас есть идеи по развитию этого проекта или же свои идеи для других "стартапов", то всегда можем обсудить</li>
+                    <li>Могу рассказать, что такое акселераторы и как в них может попасть даже школьный проект</li>
+                </ul>
+                
+                <p>Предлагаю встречи раз в месяц по Zoom или лично в Москве (по договоренности). Также доступен для вопросов в Telegram</p>
+                
+                <div class="modal-mentor-skills">
+                    <span class="skill-tag">Физика</span>
+                    <span class="skill-tag">Олимпиады</span>
+                    <span class="skill-tag">МФТИ</span>
+                    <span class="skill-tag">Поступление</span>
+                    <span class="skill-tag">ЕГЭ</span>
+                    <span class="skill-tag">Стартап</span>
+                </div>
+                
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScgTv7MvO2sMWHkAZbLVwoeFf9FxgukMqgrh5VYqX_2vM0kqQ/viewform?usp=dialog" class="btn modal-register-btn">
+                    <i class="fas fa-user-check"></i> Зарегистрироваться
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-mentor2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-mentor2')">&times;</span>
+            <h3>Екатерина Авдохина</h3>
+            <div class="modal-mentor-info">
+                <div class="modal-status status-open">Набор открыт</div>
+                <p><strong>Выпускница:</strong> 2023 года</p>
+                <p><strong>Образование:</strong> МФТИ, 2 курс ЛФИ</p>
+                <p><strong>Достижения:</strong> ВСОШ по физике</p>
+                
+                <p>Привет! Я студентка 2-го курса МФТИ ЛФИ, занимаюсь теорфизикой. В школе активно участвовала в олимпиадах, после — преподавала физику на летних олимпиадных школах. Помогу вам:</p>
+                <ul>
+                    <li>Подобрать материалы для подготовки к олимпиадам по физике</li>
+                    <li>Разобрать тему по физике</li>
+                    <li>Разобраться в направлениях МФТИ перед поступлением</li>
+                </ul>
+                <p>Для желающих заняться объемной проектной задачей предлагаю темы:</p>
+                <ul>
+                    <li>I. Изучение влияния других планет Солнечной Системы на траекторию Меркурия в классической модели. <br>
+                        <strong>To be studied:</strong> основы небесной механики и теории возмущений, моделирование на python движения планет в классической модели.</li>
+                    <li>II. Изучение влияния кривизны пространства на траекторию Меркурия в рамках общей теории относительности (ОТО) Эйнштейна.<br>
+                        <strong>To be studied</strong> основы специальной теории относительности (СТО), задача Кеплера в СТО и ОТО, моделирование на python движения планет в рамках ОТО.</li>
+                </ul>
+                <p><em>Список тем будет пополняться</em></p>
+
+                <p>По вопросам школьной/олимпиадной физики и поступления предлагаю встречи раз в месяц в Zoom.
+                    В рамках проектной деятельности предлагаю встречи раз в 1-2 недели в Zoom.<br>
+                    Также для вопросов доступна в Telegram.</p>
+                
+                <div class="modal-mentor-skills">
+                    <span class="skill-tag">Физика</span>
+                    <span class="skill-tag">МФТИ</span>
+                    <span class="skill-tag">Олимпиады</span>
+                    <span class="skill-tag">Проектная деятельность</span>
+                </div>
+                
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScgTv7MvO2sMWHkAZbLVwoeFf9FxgukMqgrh5VYqX_2vM0kqQ/viewform?usp=dialog" class="btn modal-register-btn">
+                    <i class="fas fa-user-check"></i> Зарегистрироваться
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-mentor3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-mentor3')">&times;</span>
+            <h3>Глеб Смирнов</h3>
+            <div class="modal-mentor-info">
+                <div class="modal-status status-open">Набор открыт</div>
+                <p><strong>Выпускник:</strong> 2024 года</p>
+                <p><strong>Образование:</strong> МФТИ, 2 курс ЛФИ</p>
+                <p><strong>Достижения:</strong> РсОШ по математике</p>
+                
+                <p>Привет! Я студент МФТИ. В школе активно участвовал в олимпиадах и знаю, как готовиться к ним.</p>
+                <ul>
+                    <li>Балансирование между олимпиадами и ЕГЭ</li>
+                    <li>Помощь в ориентировании на рынке ВУЗов</li>
+                </ul>
+                
+                <p>Предлагаю встречи раз в месяц по Zoom. Также доступен для вопросов в Telegram</p>
+                
+                <div class="modal-mentor-skills">
+                    <span class="skill-tag">Физика</span>
+                    <span class="skill-tag">Математика</span>
+                    <span class="skill-tag">Перечни</span>
+                    <span class="skill-tag">Успех</span>
+                    <span class="skill-tag">МФТИ</span>
+                </div>
+                
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScgTv7MvO2sMWHkAZbLVwoeFf9FxgukMqgrh5VYqX_2vM0kqQ/viewform?usp=dialog" class="btn modal-register-btn">
+                    <i class="fas fa-user-check"></i> Зарегистрироваться
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-mentor4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-mentor4')">&times;</span>
+            <h3>Сергей Кокушев</h3>
+            <div class="modal-mentor-info">
+                <div class="modal-status status-open">Набор открыт</div>
+                <p><strong>Выпускник:</strong> 2024 года</p>
+                <p><strong>Образование:</strong> МГУ, 2 курс Мехмат</p>
+                <p><strong>Достижения:</strong> Отделение матфизики мехмата, 96 ЕГЭ математика</p>
+                
+                <p>Привет! Я студент МГУ. В школе активно участвовал в олимпиадах и знаю, как готовиться к ним.</p>
+                <ul>
+                    <li>Могу рассказать про мехмат: различия между отделениями и кафедрами</li>
+                    <li>Могу рассказать про студенческую жизнь в МГУ</li>
+                </ul>
+                
+                <p>Предлагаю встречи раз в месяц по Zoom. Также доступен для вопросов в Telegram</p>
+                
+                <div class="modal-mentor-skills">
+                    <span class="skill-tag">Физика</span>
+                    <span class="skill-tag">Олимпиады</span>
+                    <span class="skill-tag">МФТИ</span>
+                    <span class="skill-tag">Поступление</span>
+                    <span class="skill-tag">ЕГЭ</span>
+                    <span class="skill-tag">Стартап</span>
+                </div>
+                
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScgTv7MvO2sMWHkAZbLVwoeFf9FxgukMqgrh5VYqX_2vM0kqQ/viewform?usp=dialog" class="btn modal-register-btn">
+                    <i class="fas fa-user-check"></i> Зарегистрироваться
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-mentor5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal-mentor5')">&times;</span>
+            <h3>Анастасия Кирюшина</h3>
+            <div class="modal-mentor-info">
+                <div class="modal-status status-open">Набор открыт</div>
+                <p><strong>Выпускница:</strong> 2024 года</p>
+                <p><strong>Образование:</strong> Сеченовский университет 2 курс | Венский главный университет 1 курс</p>
+                <p><strong>Достижения:</strong> ЕГЭ по русскому 100 баллов</p>
+                
+                <p>Привет! В данный момент учусь в Австрии, Вена. В 11 классе решила уйти из физмата в психологию, подготовилась к ЕГЭ по биологии за 1 год с нуля и поступила в Сеченовский университет на бюджет. Одновременно с этим начала свой путь поступления заграницу и изучением немецкого. Могу помочь:</p>
+                <ul>
+                    <li>Если вы меняете род деятельности и необходимо сделать выбор или найти альтернативу, чтобы успеть все</li>
+                    <li>Дам советы, если вы планируете учиться в Австрии</li>
+                    <li>Поделюсь способами, как совместить несовместимое</li>
+                    <li>Расскажу подробнее как устроена психологическая практика в России, а так же какой вуз лучше выбрать для ваших целей</li>
+                </ul>
+                
+                <p>Предлагаю встречи раз в месяц по Zoom. Также доступна для вопросов в Telegram</p>
+                
+                <div class="modal-mentor-skills">
+                    <span class="skill-tag">Биология</span>
+                    <span class="skill-tag">Поступление</span>
+                    <span class="skill-tag">ПМГМУ</span>
+                    <span class="skill-tag">Психология</span>
+                </div>
+                
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScgTv7MvO2sMWHkAZbLVwoeFf9FxgukMqgrh5VYqX_2vM0kqQ/viewform?usp=dialog" class="btn modal-register-btn">
+                    <i class="fas fa-user-check"></i> Зарегистрироваться
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillSearch = document.getElementById('skill-search');
+            const statusFilter = document.getElementById('status-filter');
+            const mentorCards = document.querySelectorAll('.mentor-card');
+            let firstRun = true;
+
+            function filterMentors() {
+                const keywordValue = skillSearch.value.toLowerCase().trim();
+                const statusValue = statusFilter.value;
+                
+                mentorCards.forEach(card => {
+                    const keywords = card.dataset.skills.toLowerCase();
+                    const matchesKeyword = keywordValue === '' || keywords.includes(keywordValue);
+                    const matchesStatus = statusValue === 'all' || card.dataset.status === statusValue;
+                    const matches = matchesKeyword && matchesStatus;
+                    
+                    if (firstRun) {
+                        if (!matches) {
+                            card.classList.add('hidden');
+                            card.style.display = 'none';
+                        }
+                    } else {
+                        if (matches) {
+                            if (card.classList.contains('hidden')) {
+                                card.style.display = 'block';
+                                setTimeout(() => {
+                                    card.classList.remove('hidden');
+                                }, 10);
+                            }
+                        } else {
+                            if (!card.classList.contains('hidden')) {
+                                card.classList.add('hidden');
+                                setTimeout(() => {
+                                    if (card.classList.contains('hidden')) {
+                                        card.style.display = 'none';
+                                    }
+                                }, 500);
+                            }
+                        }
+                    }
+                });
+                
+                firstRun = false;
+            }
+            
+            skillSearch.addEventListener('input', filterMentors);
+            statusFilter.addEventListener('change', filterMentors);
+            
+            filterMentors();
+        });
+    </script>
+</body>
+</html>
