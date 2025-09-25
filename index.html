@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -11,10 +12,11 @@
         ym(104258182, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/104258182" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+    <!-- /Yandex.Metrika counter -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Программа наставничества | Alumni Connect</title>
+    <title>Alumni Connect: Программа наставничества</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -252,13 +254,9 @@
             transform: scale(1.04);
         }
         
-        
         .mentor-info {
-    
             padding: 25px;
         }
-        
-
         
         .mentor-school {
             display: block;
@@ -754,9 +752,112 @@
             color: var(--secondary);
             margin-top: 10px;
         }
+        
+        /* FAQ Styles */
+        .faq-section {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin: 40px 0;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 25px;
+        }
+        
+        .faq-question {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            color: var(--secondary);
+        }
+        
+        .faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            font-weight: normal;
+            transition: var(--transition);
+        }
+        
+        .faq-item.active .faq-question::after {
+            content: "-";
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .highlight {
+            background-color: #fff9e6;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body>
+    <!-- Back to top button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
     <header class="main-header">
         <div class="container">
             <div class="header-logo">
@@ -792,7 +893,7 @@
             
             <div class="about-program">
                 <p style="font-size: 1.2rem; margin-bottom: 30px; text-align: center;">
-                    Программа менторства создана для связи успешных выпускников с нынешними учениками. 
+                    Программа наставничества Alumni Connect создана для связи успешных выпускников с нынешними учениками. 
                     Наша миссия - передача знаний, опыта и вдохновения для достижения академических успехов.
                 </p>
                 
@@ -800,7 +901,7 @@
                     <div class="program-card">
                         <div class="icon"><i class="fas fa-trophy"></i></div>
                         <h3>Подготовка к олимпиадам</h3>
-                        <p>Помощь в формировании стратегии подготовки к ВсОШ и перечневым олимпиадам от призёров и победителей.                        </p>
+                        <p>Помощь в формировании стратегии подготовки к ВсОШ и перечневым олимпиадам от призёров и победителей.</p>
                     </div>
                     
                     <div class="program-card">
@@ -957,7 +1058,7 @@
                     <div class="mentor-info">
                         <span class="mentor-school">Выпускница 2024 года</span>
                         <h3>Анастасия Кирюшина</h3>
-                        <span class="mentor-achievements">Сеченовский университет 2 курс| Венский университет 1 курс</span>
+                        <span class="mentor-achievements">Сеченовский университет 2 курс| Венский главный университет 1 курс</span>
                         <p>Помогу определиться с родом деятельности, расскажу про поступление в Австрию</p>
                         <div class="mentor-skills">
                             <span class="skill-tag">Биология</span>
@@ -971,6 +1072,66 @@
                                 <i class="fas fa-user-circle"></i> Узнать больше
                             </button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Сколько стоит участие в программе?</div>
+                    <div class="faq-answer">
+                        Участие в программе <span class="highlight">абсолютно бесплатно</span> для всех учеников и наставников. 
+                        Программа создана как волонтерская инициатива выпускников для помощи нынешним ученикам школы.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Как происходит общение с наставником?</div>
+                    <div class="faq-answer">
+                        Формат общения определяется индивидуально между наставником и учеником. 
+                        Чаще всего это онлайн-встречи через Zoom или аналогичные платформы раз в 1-2 недели, 
+                        а также возможность задавать вопросы в мессенджерах между встречами.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Что делать, если я не нашел подходящего наставника?</div>
+                    <div class="faq-answer">
+                        Если среди текущих наставников нет специалиста по интересующей вас теме, 
+                        свяжитесь с нами через Telegram или email. Мы постараемся найти подходящего 
+                        наставника среди выпускников или расширить программу в нужном направлении.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Может ли наставник помочь с поступлением в вуз?</div>
+                    <div class="faq-answer">
+                        Да, многие наставники являются студентами ведущих вузов страны и могут 
+                        поделиться опытом поступления, рассказать об особенностях обучения и 
+                        помочь с подготовкой к вступительным испытаниям.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Как стать наставником?</div>
+                    <div class="faq-answer">
+                        Если вы выпускник школы и хотите стать наставником, заполните 
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScYOd8QYw7TpjeK7NYpweIRX1vZU4Jv1uejmgbe3RUZOgpzpg/viewform?usp=dialog" class="highlight">форму регистрации</a>. 
+                        После проверки вашей заявки мы свяжемся с вами для уточнения деталей и добавления вашей карточки на сайт.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Наставники оказывают платные образовательные услуги?</div>
+                    <div class="faq-answer">
+                        В рамках программы Alumni Connect наставники оказывают только бесплатную помощь. 
+                        Если наставник указывает в своей карточке возможность платных услуг, 
+                        это происходит вне программы и является его личной инициативой.
                     </div>
                 </div>
             </div>
@@ -1237,6 +1398,7 @@
         }
         
         document.addEventListener('DOMContentLoaded', function() {
+            // Фильтрация наставников
             const skillSearch = document.getElementById('skill-search');
             const statusFilter = document.getElementById('status-filter');
             const mentorCards = document.querySelectorAll('.mentor-card');
@@ -1285,6 +1447,43 @@
             statusFilter.addEventListener('change', filterMentors);
             
             filterMentors();
+            
+            // FAQ функционал
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Закрываем все открытые вопросы
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Переключаем текущий вопрос
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Кнопка "Наверх"
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
