@@ -225,6 +225,7 @@
             transition: var(--transition);
             position: relative;
             border-top: 5px solid var(--primary);
+            cursor: pointer;
         }
         
         .mentor-card:hover {
@@ -850,9 +851,76 @@
             background: var(--secondary);
             transform: translateY(-3px);
         }
+
+        /* Новые стили для улучшений */
+        .floating-register-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 5px;
+            background: var(--accent);
+            color: #212529;
+            padding: 12px 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(255, 158, 27, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+        
+        .floating-register-btn:hover {
+            background: #e08c00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(255, 158, 27, 0.7);
+            color: #212529;
+        }
+        
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-box {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-box p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+        
+        .cta-box .btn {
+            background: var(--accent);
+            color: #212529;
+            font-size: 1.2rem;
+            padding: 16px 40px;
+        }
+        
+        .no-mentors-message {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2rem;
+            grid-column: 1 / -1;
+        }
     </style>
 </head>
 <body>
+    <!-- Плавающая кнопка регистрации -->
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScgTv7MvO2sMWHkAZbLVwoeFf9FxgukMqgrh5VYqX_2vM0kqQ/viewform?usp=dialog" class="floating-register-btn">
+        <i class="fas fa-user-plus"></i> Зарегистрироваться
+    </a>
+
     <!-- Back to top button -->
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-chevron-up"></i>
@@ -945,8 +1013,12 @@
                 </div>
             </div>
             
+            <div id="no-mentors-message" class="no-mentors-message" style="display: none;">
+                <p>По вашему запросу наставники не найдены. <a href="https://docs.google.com/forms/d/e/1FAIpQLScYOd8QYw7TpjeK7NYpweIRX1vZU4Jv1uejmgbe3RUZOgpzpg/viewform?usp=dialog">Стать первым?</a></p>
+            </div>
+            
             <div class="mentor-gallery">
-                <div class="mentor-card" data-status="open" data-skills="физика олимпиады мфти поступление егэ РСОШ Стартап педагогика">
+                <div class="mentor-card" data-status="open" data-skills="физика олимпиады мфти поступление егэ РСОШ Стартап педагогика" onclick="openModal('modal-mentor1')">
                     <div class="mentor-status status-open">Набор открыт</div>
                     <div class="mentor-image">
                         <img src="https://systematika.org/wp-content/uploads/2025/05/photo_2025-04-22_16-58-39.jpg" alt="Владислав Козьминых">
@@ -975,7 +1047,7 @@
                     </div>
                 </div>
 
-                <div class="mentor-card" data-status="open" data-skills="мфти физика олимпиады проектная деятельность ВСОШ">
+                <div class="mentor-card" data-status="open" data-skills="мфти физика олимпиады проектная деятельность ВСОШ" onclick="openModal('modal-mentor2')">
                     <div class="mentor-status status-open">Набор открыт</div>
                     <div class="mentor-image">
                         <img src="https://sun9-69.userapi.com/s/v1/ig2/qKJOujnzVw4DUDxZnZTYSj-wXMfWA606ud0k7MKOsqun8MrDA1AwkQsEI_kZZgmM_qNgh8Mj4W4yC9onU-RLm91u.jpg?quality=96&as=32x35,48x53,72x80,108x120,160x177,240x266,360x399,480x532,540x599,640x710,695x771&from=bu&cs=695x0" alt="Екатерина Авдохина">
@@ -1000,7 +1072,7 @@
                     </div>
                 </div>
 
-                <div class="mentor-card" data-status="open" data-skills="мфти математика физика поступление ЕГЭ РСОШ">
+                <div class="mentor-card" data-status="open" data-skills="мфти математика физика поступление ЕГЭ РСОШ" onclick="openModal('modal-mentor3')">
                     <div class="mentor-status status-open">Набор открыт</div>
                     <div class="mentor-image">
                         <img src="https://sun9-74.userapi.com/s/v1/ig2/HU3a9kmzes_pK_aAxSnU9-7SRrb1W15IZhZW9GhkjDsxdvbCtEUJ816rGmrXelnjtBYoh5x1pjwyaaSJV6pHG5NF.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x319,360x479,480x639,540x718,640x852,720x958,962x1280&from=bu&cs=962x0" alt="Глеб Смирнов">
@@ -1025,7 +1097,7 @@
                     </div>
                 </div>
 
-                <div class="mentor-card" data-status="open" data-skills="МГУ Мехмат Математика Поступление Физика ЕГЭ РСОШ">
+                <div class="mentor-card" data-status="open" data-skills="МГУ Мехмат Математика Поступление Физика ЕГЭ РСОШ" onclick="openModal('modal-mentor4')">
                     <div class="mentor-status status-open">Набор открыт</div>
                     <div class="mentor-image">
                         <img src="https://psv4.userapi.com/s/v1/d2/sqH5wbHpi3-cukDf2Nsnnjc_-AGp6OE8C7dYKxRxKRU-pTbzqSJnS-3T_ak4bnyRX3p7HyQv-d4Oef4771mnASLvnu5V8M58lPYTSuJYoaYdJg3QG0gH_YSfLSVd3QM1BjZ7Dsg1kge9/Kok.jpg" alt="Сергей Кокушев">
@@ -1052,7 +1124,7 @@
                     </div>
                 </div>
 
-                <div class="mentor-card" data-status="open" data-skills="Биология Поступление ПМГМУ Психология Австрия">
+                <div class="mentor-card" data-status="open" data-skills="Биология Поступление ПМГМУ Психология Австрия" onclick="openModal('modal-mentor5')">
                     <div class="mentor-status status-open">Набор открыт</div>
                     <div class="mentor-image">
                         <img src="https://sun9-54.userapi.com/s/v1/ig2/K9rgGRxOVa9XPrqm-ojCvW1HJjlYVZlP8e6PidFZ3sLgmVlgRx2K79cPiS_xaJIBEnYoo-P79ZACxNceEWcb69n4.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640&from=bu&cs=640x0" alt="Анастасия Кирюшина">
@@ -1075,6 +1147,17 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-box">
+                    <h2>Готовы найти своего наставника?</h2>
+                    <p>Зарегистрируйтесь и начните свой путь к успеху с Alumni Connect</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScgTv7MvO2sMWHkAZbLVwoeFf9FxgukMqgrh5VYqX_2vM0kqQ/viewform?usp=dialog" class="btn">Зарегистрироваться сейчас</a>
                 </div>
             </div>
         </section>
@@ -1406,11 +1489,13 @@
             const skillSearch = document.getElementById('skill-search');
             const statusFilter = document.getElementById('status-filter');
             const mentorCards = document.querySelectorAll('.mentor-card');
+            const noMentorsMessage = document.getElementById('no-mentors-message');
             let firstRun = true;
 
             function filterMentors() {
                 const keywordValue = skillSearch.value.toLowerCase().trim();
                 const statusValue = statusFilter.value;
+                let visibleCount = 0;
                 
                 mentorCards.forEach(card => {
                     const keywords = card.dataset.skills.toLowerCase();
@@ -1422,6 +1507,8 @@
                         if (!matches) {
                             card.classList.add('hidden');
                             card.style.display = 'none';
+                        } else {
+                            visibleCount++;
                         }
                     } else {
                         if (matches) {
@@ -1431,6 +1518,7 @@
                                     card.classList.remove('hidden');
                                 }, 10);
                             }
+                            visibleCount++;
                         } else {
                             if (!card.classList.contains('hidden')) {
                                 card.classList.add('hidden');
@@ -1443,6 +1531,13 @@
                         }
                     }
                 });
+                
+                // Показать/скрыть сообщение о том, что наставники не найдены
+                if (visibleCount === 0) {
+                    noMentorsMessage.style.display = 'block';
+                } else {
+                    noMentorsMessage.style.display = 'none';
+                }
                 
                 firstRun = false;
             }
