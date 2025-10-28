@@ -1033,6 +1033,204 @@
         </div>
         </div>
     </header>
+    
+    <!-- ДОБАВЬТЕ ЭТОТ КОД СРАЗУ ПОСЛЕ ЗАКРЫВАЮЩЕГО ТЕГА </header> -->
+
+<!-- Баннер встречи -->
+<section id="meeting-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 0; position: relative; overflow: hidden;">
+    <div class="container">
+        <div style="text-align: center; position: relative; z-index: 2;">
+            <!-- Иконка закрытия -->
+            <div style="position: absolute; top: 10px; right: 10px;">
+                <button onclick="closeMeetingBanner()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; opacity: 0.8; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">×</button>
+            </div>
+            
+            <h2 style="margin-bottom: 15px; font-size: 1.8rem;">🚀 Встреча с наставниками 10 ноября</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Приходим на урок к 10Ф классу! Студенты МФТИ ответят на ваши вопросы о поступлении и олимпиадах.
+            </p>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 25px;">
+                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; backdrop-filter: blur(5px); max-width: 300px;">
+                    <h4 style="margin-bottom: 8px;">Екатерина</h4>
+                    <p style="font-size: 0.9rem; opacity: 0.9;">ПиП ВСОШ по физике, МФТИ (ЛФИ)</p>
+                </div>
+                <div style="background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; backdrop-filter: blur(5px); max-width: 300px;">
+                    <h4 style="margin-bottom: 8px;">Владислав</h4>
+                    <p style="font-size: 0.9rem; opacity: 0.9;">ПиП РСОШ по физике, МФТИ (ЛФИ)</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center;">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScVXGZigdOOiHDNQht8RObxYaBjGsa6Byc3pQUxCWp1_xXjAg/viewform?usp=dialog" 
+                   class="btn" 
+                   style="background: #ff9e1b; color: #212529; font-size: 1.1rem; padding: 12px 25px;">
+                    <i class="fas fa-question-circle"></i> Задать вопрос наставникам
+                </a>
+                
+                <button onclick="openShareModal()" 
+                        class="btn" 
+                        style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); font-size: 1.1rem; padding: 12px 25px;">
+                    <i class="fas fa-share-alt"></i> Поделиться
+                </button>
+            </div>
+            
+            <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+                Встреча будет полезной именно для вас - задайте вопросы, которые вас действительно волнуют!
+            </p>
+        </div>
+    </div>
+    
+    <!-- Декоративные элементы -->
+    <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+    <div style="position: absolute; bottom: -30px; left: -30px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+</section>
+
+<!-- Модальное окно для шаринга -->
+<div id="share-modal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 500px;">
+        <span class="close" onclick="closeShareModal()">&times;</span>
+        <h3 style="margin-bottom: 20px; text-align: center;">Поделиться встречей</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px;">
+            <button onclick="shareToTelegram()" class="share-btn" style="background: #0088cc; color: white;">
+                <i class="fab fa-telegram"></i> Telegram
+            </button>
+            <button onclick="shareToVK()" class="share-btn" style="background: #4a76a8; color: white;">
+                <i class="fab fa-vk"></i> ВКонтакте
+            </button>
+            <button onclick="shareToWhatsApp()" class="share-btn" style="background: #25D366; color: white;">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </button>
+            <button onclick="copyLink()" class="share-btn" style="background: #6c757d; color: white;">
+                <i class="fas fa-link"></i> Копировать ссылку
+            </button>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 15px;">
+            <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                <strong>Текст для сообщения:</strong><br>
+                "10 ноября приходим на урок к 10Ф классу! Студенты МФТИ Екатерина и Владислав ответят на вопросы о поступлении, олимпиадах и учёбе. Задай свой вопрос заранее в форме!"
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Уведомление о копировании -->
+<div id="copy-notification" style="position: fixed; bottom: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 25px; border-radius: 5px; display: none; z-index: 1001; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <i class="fas fa-check-circle"></i> Ссылка скопирована в буфер обмена!
+</div>
+
+<script>
+// Функция для закрытия баннера
+function closeMeetingBanner() {
+    document.getElementById('meeting-banner').style.display = 'none';
+}
+
+// Функции для модального окна шаринга
+function openShareModal() {
+    document.getElementById('share-modal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeShareModal() {
+    document.getElementById('share-modal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Текст и ссылка для шаринга
+const shareText = "10 ноября приходим на урок к 10Ф классу! Студенты МФТИ Екатерина и Владислав ответят на вопросы о поступлении, олимпиадах и учёбе. Задай свой вопрос заранее в форме!";
+const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLScVXGZigdOOiHDNQht8RObxYaBjGsa6Byc3pQUxCWp1_xXjAg/viewform?usp=dialog";
+
+// Функции для шаринга в соцсети
+function shareToTelegram() {
+    const text = encodeURIComponent(shareText);
+    const url = encodeURIComponent(formUrl);
+    window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+    closeShareModal();
+}
+
+function shareToVK() {
+    const url = encodeURIComponent(formUrl);
+    const title = encodeURIComponent("Встреча со студентами МФТИ 10 ноября");
+    const description = encodeURIComponent(shareText);
+    window.open(`https://vk.com/share.php?url=${url}&title=${title}&description=${description}`, '_blank');
+    closeShareModal();
+}
+
+function shareToWhatsApp() {
+    const text = encodeURIComponent(shareText + " " + formUrl);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
+    closeShareModal();
+}
+
+function copyLink() {
+    navigator.clipboard.writeText(shareText + " " + formUrl).then(() => {
+        // Показываем уведомление
+        const notification = document.getElementById('copy-notification');
+        notification.style.display = 'block';
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 3000);
+    });
+    closeShareModal();
+}
+
+// Закрытие модального окна при клике вне его
+window.onclick = function(event) {
+    const modal = document.getElementById('share-modal');
+    if (event.target === modal) {
+        closeShareModal();
+    }
+}
+</script>
+
+<style>
+/* Стили для кнопок шаринга */
+.share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    #meeting-banner h2 {
+        font-size: 1.4rem;
+    }
+    
+    #meeting-banner p {
+        font-size: 1rem;
+    }
+    
+    .share-btn {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #share-modal .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+}
+</style>
+
+    
 
     <div class="container">
         <section class="stats-section">
