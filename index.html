@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alumni Connect: Программа наставничества | Наставники из МФТИ, МГУ, ПМГМУ</title>
-    <meta name="description" content="Бесплатная программа наставничества Alumni Connect. Студенты МФТИ, МГУ, ПМГМУ и других ведущих вузов помогут с олимпиадами, поступлением и проектами">
+    <title>Alumni Connect: Наставничество от выпускников | Бесплатно для школьников</title>
+    <meta name="description" content="Бесплатная программа наставничества от выпускников школы. Студенты МФТИ, МГУ, ПМГМУ и других вузов помогут с олимпиадами, поступлением и проектами">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #4a6fa5;
             --secondary: #345785;
             --accent: #ff9e1b;
+            --accent-light: #ffb85c;
             --light: #f8f9fc;
             --dark: #2c3e50;
             --success: #2ecc71;
@@ -139,7 +140,7 @@
             opacity: 0.9;
         }
         
-        /* Buttons */
+        /* УЛУЧШЕННЫЕ КНОПКИ - ВЫСОКИЙ КОНТРАСТ */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -150,14 +151,15 @@
             padding: 16px 32px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 800; /* Более жирный текст */
             transition: var(--transition);
             border: none;
             cursor: pointer;
             font-size: 1rem;
-            box-shadow: 0 6px 20px rgba(255, 158, 27, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 158, 27, 0.5);
             position: relative;
             overflow: hidden;
+            letter-spacing: 0.5px;
         }
         
         .btn::before {
@@ -167,7 +169,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
             transition: 0.5s;
         }
         
@@ -177,30 +179,97 @@
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 158, 27, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 158, 27, 0.6);
             background: #e08c00;
         }
         
+        /* Основная оранжевая кнопка */
         .btn-primary {
             background: white;
-            color: var(--primary);
+            color: var(--secondary);
+            font-weight: 800;
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
         .btn-primary:hover {
             background: #f0f0f0;
             color: var(--secondary);
+            border-color: white;
         }
         
+        /* Кнопка с обводкой - ВЫСОКИЙ КОНТРАСТ */
         .btn-outline {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: 3px solid white;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            font-weight: 800;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+            text-shadow: none;
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 6px 20px rgba(52, 87, 133, 0.4);
+            font-weight: 800;
+        }
+        
+        .btn-secondary:hover {
+            background: #2a466c;
+        }
+        
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.4);
+            font-weight: 800;
+        }
+        
+        .btn-telegram:hover {
+            background: #0077b5;
+        }
+        
+        .btn-mentor {
             background: transparent;
             color: var(--primary);
             border: 2px solid var(--primary);
             box-shadow: none;
+            font-weight: 700;
         }
         
-        .btn-outline:hover {
+        .btn-mentor:hover {
             background: var(--primary);
             color: white;
+        }
+        
+        /* Оранжевая кнопка для регистрации */
+        .btn-register {
+            background: var(--accent);
+            color: #212529;
+            font-weight: 800;
+            box-shadow: 0 6px 20px rgba(255, 158, 27, 0.5);
+        }
+        
+        .btn-register:hover {
+            background: #e08c00;
+            box-shadow: 0 10px 25px rgba(255, 158, 27, 0.6);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
         }
         
         /* Sections */
@@ -290,6 +359,145 @@
             font-size: 1.4rem;
             color: var(--secondary);
             margin-bottom: 20px;
+        }
+        
+        /* Steps Section */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            counter-reset: step-counter;
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 30px 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .step-card::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 6px 15px rgba(255, 158, 27, 0.3);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .step-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin: 20px 0 25px;
+            display: block;
+        }
+        
+        /* НОВАЯ СЕКЦИЯ: От создателя */
+        .founder-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+            border-radius: var(--radius);
+            margin: 40px auto;
+            padding: 50px;
+            box-shadow: var(--shadow);
+            max-width: 1000px;
+        }
+        
+        .founder-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .founder-title {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .founder-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .founder-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .founder-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .founder-text {
+            flex-grow: 1;
+        }
+        
+        .founder-quote {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--dark);
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 30px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .founder-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+        
+        .founder-role {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .founder-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .founder-quote {
+                padding-left: 0;
+                border-left: none;
+                padding-top: 20px;
+                border-top: 4px solid var(--accent);
+            }
+            
+            .founder-section {
+                padding: 30px 20px;
+            }
         }
         
         /* Mentor Cards */
@@ -407,6 +615,46 @@
             margin-top: auto;
         }
         
+        /* University Badges */
+        .university-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .university-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            min-width: 120px;
+            transition: var(--transition);
+        }
+        
+        .university-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .university-logo {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .university-name {
+            font-weight: 600;
+            color: var(--secondary);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
         /* Filters */
         .filters-container {
             background: white;
@@ -457,55 +705,87 @@
             font-size: 1.2rem;
         }
         
-        /* Advanced Filters */
-        .advanced-filters {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+        /* Results Section */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         
-        .custom-select {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
+        .result-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--accent);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .result-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
             margin: 0 auto;
         }
         
-        .custom-select select {
-            width: 100%;
-            padding: 15px 20px;
-            border-radius: 12px;
-            border: 2px solid #e9ecef;
+        .faq-item {
             background: white;
-            font-size: 1rem;
-            color: var(--dark);
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
             transition: var(--transition);
-            appearance: none;
+        }
+        
+        .faq-question {
+            padding: 25px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary);
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        
-        .custom-select::after {
-            content: '\f078';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            color: var(--primary);
-            pointer-events: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             transition: var(--transition);
         }
         
-        .custom-select:hover::after {
+        .faq-question:hover {
+            background: #f8fafd;
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
             color: var(--accent);
         }
         
-        .custom-select select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.1);
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 30px 25px 30px;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
         }
         
         /* CTA Section */
@@ -619,11 +899,18 @@
             color: #999;
         }
         
-        /* Floating Button */
-        .floating-btn {
+        /* Floating Buttons */
+        .floating-buttons {
             position: fixed;
             bottom: 30px;
             right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .floating-btn {
             background: var(--accent);
             color: #212529;
             width: 70px;
@@ -634,11 +921,16 @@
             justify-content: center;
             font-size: 1.5rem;
             box-shadow: 0 8px 25px rgba(255, 158, 27, 0.4);
-            z-index: 1000;
             transition: var(--transition);
             text-decoration: none;
             opacity: 0;
             animation: fadeIn 1s ease 1s forwards;
+            font-weight: 800;
+        }
+        
+        .floating-btn.telegram {
+            background: #0088cc;
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
         }
         
         .floating-btn:hover {
@@ -646,7 +938,11 @@
             box-shadow: 0 12px 30px rgba(255, 158, 27, 0.5);
         }
         
-        /* Modal Styles */
+        .floating-btn.telegram:hover {
+            box-shadow: 0 12px 30px rgba(0, 136, 204, 0.5);
+        }
+        
+        /* УЛУЧШЕННОЕ МОДАЛЬНОЕ ОКНО */
         .modal {
             display: none;
             position: fixed;
@@ -654,7 +950,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(5px);
             z-index: 2000;
             overflow-y: auto;
@@ -667,9 +963,12 @@
             max-width: 900px;
             margin: 40px auto;
             position: relative;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
             animation: modalOpen 0.4s ease;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 85vh;
         }
         
         @keyframes modalOpen {
@@ -684,12 +983,13 @@
         }
         
         .modal-header {
-            padding: 30px 30px 20px;
+            padding: 25px 30px 15px;
             border-bottom: 1px solid #eee;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             position: relative;
+            flex-shrink: 0;
         }
         
         .modal-title {
@@ -700,7 +1000,7 @@
         
         .modal-status {
             position: absolute;
-            top: 30px;
+            top: 25px;
             right: 80px;
             padding: 8px 16px;
             border-radius: 20px;
@@ -732,11 +1032,17 @@
         }
         
         .modal-body {
-            padding: 30px;
+            padding: 25px 30px;
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
         
         .modal-mentor-info {
-            margin-bottom: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .modal-mentor-details {
@@ -744,12 +1050,14 @@
             grid-template-columns: 1fr 2fr;
             gap: 30px;
             margin-bottom: 30px;
+            flex-grow: 1;
         }
         
         .modal-mentor-image {
             width: 100%;
             border-radius: var(--radius);
             overflow: hidden;
+            height: fit-content;
         }
         
         .modal-mentor-image img {
@@ -770,8 +1078,33 @@
             color: #555;
         }
         
+        /* Блок с информацией о наставнике с фиксированной высотой и прокруткой */
+        .modal-details-content {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-details-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .modal-details-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .modal-details-content::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
         .modal-form-container {
-            margin-top: 30px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+            flex-shrink: 0;
         }
         
         .form-notice {
@@ -788,20 +1121,15 @@
             font-size: 0.9rem;
         }
         
-        .google-form-container {
+        /* Кнопка регистрации - всегда видна */
+        .modal-register-btn {
+            display: block;
             width: 100%;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            background: white;
             text-align: center;
-            padding: 30px;
-        }
-        
-        .google-form-container iframe {
-            width: 100%;
-            border: none;
-            min-height: 600px;
+            padding: 18px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-top: 10px;
         }
         
         /* Improved list styling */
@@ -841,6 +1169,16 @@
                 grid-template-columns: 1fr;
             }
             
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
             .filter-tags {
                 justify-content: flex-start;
             }
@@ -855,6 +1193,7 @@
             
             .modal-content {
                 margin: 20px auto;
+                max-height: 90vh;
             }
             
             .modal-header {
@@ -870,9 +1209,12 @@
                 right: 70px;
             }
             
-            .floating-btn {
+            .floating-buttons {
                 bottom: 20px;
                 right: 20px;
+            }
+            
+            .floating-btn {
                 width: 60px;
                 height: 60px;
                 font-size: 1.3rem;
@@ -882,14 +1224,34 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
+            
+            .modal-details-content {
+                max-height: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .modal-details-content {
+                max-height: 200px;
+            }
+            
+            .modal-register-btn {
+                padding: 16px;
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Action Button -->
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScgTv7MvO2sMWHkAZbLVwoeFf9FxgukMqgrh5VYqX_2vM0kqQ/viewform?usp=dialog" target="_blank" class="floating-btn">
-        <i class="fas fa-user-plus"></i>
-    </a>
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <a href="https://t.me/mentor_at_school" target="_blank" class="floating-btn telegram" title="Задать вопрос в Telegram">
+            <i class="fab fa-telegram"></i>
+        </a>
+        <a href="#mentors" class="floating-btn" title="Найти наставника">
+            <i class="fas fa-search"></i>
+        </a>
+    </div>
 
     <!-- Header -->
     <header class="main-header">
@@ -902,14 +1264,25 @@
                     </div>
                     <div class="logo-text">Alumni Connect</div>
                 </div>
-                <h1>Программа наставничества</h1>
+                <h1>Наставничество от выпускников — твой путь к успеху</h1>
                 <p class="header-description">
-                    Alumni Connect — это бесплатная программа наставничества, которая объединяет успешных выпускников школы с нынешними учениками. 
-                    Наши наставники — студенты ведущих вузов России (МФТИ, МГУ, ПМГМУ и других), которые недавно прошли путь от школьника к студенту и готовы поделиться своим опытом.
+                    Бесплатная программа наставничества, где студенты ведущих вузов России делятся опытом с нынешними школьниками. 
+                    Получи индивидуальную помощь с олимпиадами, проектами и поступлением от тех, кто прошёл этот путь недавно.
                 </p>
-                <a href="#mentors" class="btn btn-primary">
-                    <i class="fas fa-search"></i> Найти наставника
-                </a>
+                <div class="action-buttons">
+                    <a href="#mentors" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Выбрать наставника
+                    </a>
+                    <a href="#how-it-works" class="btn btn-outline">
+                        <i class="fas fa-play-circle"></i> Как это работает?
+                    </a>
+                    <a href="https://t.me/mentor_at_school" target="_blank" class="btn btn-telegram">
+                        <i class="fab fa-telegram"></i> Задать вопрос
+                    </a>
+                </div>
+                <div style="margin-top: 30px; font-size: 0.9rem; opacity: 0.9;">
+                    <p><i class="fas fa-shield-alt"></i> Бесплатно • Безопасно • Для учеников нашей школы</p>
+                </div>
             </div>
         </div>
     </header>
@@ -918,7 +1291,7 @@
     <section id="stats">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Наш старт</h2>
+                <h2 class="section-title">Проект в цифрах</h2>
                 <p class="section-subtitle">
                     Программа только начинает свой путь, но уже объединяет выпускников и учеников
                 </p>
@@ -929,22 +1302,88 @@
                         <i class="fas fa-users"></i>
                     </div>
                     <h3 class="card-title">5+ наставников</h3>
-                    <p class="card-content">Активных выпускников, готовых поделиться опытом и помочь в достижении целей</p>
+                    <p class="card-content">Студентов ведущих вузов, готовых делиться опытом</p>
                 </div>
                 <div class="card" style="animation-delay: 0.2s">
                     <div class="card-icon">
-                        <i class="fas fa-calendar-alt"></i>
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3 class="card-title">2025 год</h3>
-                    <p class="card-content">Год запуска программы наставничества для поддержки учеников школы</p>
+                    <h3 class="card-title">3+ вузов</h3>
+                    <p class="card-content">МФТИ, МГУ, ПМГМУ и другие</p>
                 </div>
                 <div class="card" style="animation-delay: 0.3s">
                     <div class="card-icon">
                         <i class="fas fa-infinity"></i>
                     </div>
-                    <h3 class="card-title">Безгранично</h3>
-                    <p class="card-content">Возможностей для развития, обучения и профессионального роста</p>
+                    <h3 class="card-title">Бесплатно</h3>
+                    <p class="card-content">Программа полностью бесплатна для всех участников</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" style="background: #f8fafd;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Как это работает?</h2>
+                <p class="section-subtitle">
+                    Всего 3 простых шага, чтобы получить помощь от опытного наставника
+                </p>
+            </div>
+            <div class="steps-container">
+                <div class="step-card" style="animation-delay: 0.1s">
+                    <i class="fas fa-user-check step-icon"></i>
+                    <h3>1. Выбери наставника</h3>
+                    <p>Изучи профили выпускников и выбери того, чей опыт тебе ближе всего. Каждый наставник специализируется на разных направлениях.</p>
+                </div>
+                <div class="step-card" style="animation-delay: 0.2s">
+                    <i class="fas fa-handshake step-icon"></i>
+                    <h3>2. Свяжись с нами</h3>
+                    <p>Напиши нам в Telegram или заполни короткую форму. Расскажи, с чем нужна помощь. Это не обязывает к долгосрочному менторству!</p>
+                </div>
+                <div class="step-card" style="animation-delay: 0.3s">
+                    <i class="fas fa-rocket step-icon"></i>
+                    <h3>3. Начни движение к цели</h3>
+                    <p>Получай советы, фидбек по проектам, помощь с подготовкой. 1-2 встречи в месяц уже дают ощутимый результат.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <p><strong>Сомневаешься? Просто задай вопрос!</strong></p>
+                <a href="https://t.me/mentor_at_school" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-telegram"></i> Написать в Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- НОВАЯ СЕКЦИЯ: От создателя проекта -->
+    <section id="founder" class="founder-section">
+        <div class="container">
+            <div class="founder-header">
+                <h2 class="founder-title">От создателя проекта</h2>
+                <p class="founder-subtitle">Почему я создал эту программу наставничества</p>
+            </div>
+            
+            <div class="founder-content">
+                <img src="https://systematika.org/wp-content/uploads/2025/05/photo_2025-04-22_16-58-39.jpg" 
+                     alt="Владислав Козьминых" class="founder-avatar">
+                
+                <div class="founder-text">
+                    <div class="founder-quote">
+                        Всем привет! Меня зовут Владислав Козьминых. Готовясь к поступлению, я потратил много месяцев, чтобы разобраться во всём сам: искал контакты студентов, ездил в кампусы, изучал тонкости. Сейчас, учась в МФТИ, я создал Alumni Connect — чтобы ваш путь к вузу стал проще. Здесь вы получите ответы от тех, кто прошёл через это буквально вчера, сэкономите время и избежите типичных ошибок. Давайте делать образование доступнее!
+                    </div>
+                    
+                    <div class="founder-name">Владислав Козьминых</div>
+                    <div class="founder-role">Студент МФТИ, основатель проекта Alumni Connect</div>
+                
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="#mentors" class="btn btn-register">
+                    <i class="fas fa-hands-helping"></i> Встретить своего наставника
+                </a>
             </div>
         </div>
     </section>
@@ -953,10 +1392,9 @@
     <section id="about">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">О программе</h2>
+                <h2 class="section-title">Чем помогут наставники?</h2>
                 <p class="section-subtitle">
-                    Программа наставничества Alumni Connect создана для связи успешных выпускников 
-                    с нынешними учениками. Наша миссия - передача знаний, опыта и вдохновения.
+                    Выпускники школы могут помочь в самых разных направлениях
                 </p>
             </div>
             <div class="card-grid">
@@ -965,23 +1403,45 @@
                         <i class="fas fa-trophy"></i>
                     </div>
                     <h3 class="card-title">Подготовка к олимпиадам</h3>
-                    <p class="card-content">Помощь в формировании стратегии подготовки к ВсОШ и перечневым олимпиадам от призеров и победителей.</p>
+                    <p class="card-content">Стратегия подготовки к ВсОШ и перечневым олимпиадам от призёров и победителей. Помощь в выборе олимпиад и распределении усилий.</p>
                 </div>
                 <div class="card" style="animation-delay: 0.2s">
                     <div class="card-icon">
                         <i class="fas fa-flask"></i>
                     </div>
                     <h3 class="card-title">Проектная деятельность</h3>
-                    <p class="card-content">Помощь с идеей или советом по исследовательскому проекту. От первого шага до выступления на конференции.</p>
+                    <p class="card-content">Помощь с идеей, методикой или оформлением исследовательского проекта. От первого шага до выступления на конференции.</p>
                 </div>
                 <div class="card" style="animation-delay: 0.3s">
                     <div class="card-icon">
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <h3 class="card-title">Профориентация</h3>
-                    <p class="card-content">Помощь в выборе вуза и специальности от студентов ведущих университетов страны.</p>
+                    <p class="card-content">Помощь в выборе вуза, специальности и построении образовательной траектории. Реальные истории студентов разных университетов.</p>
                 </div>
             </div>
+            
+            <div class="university-badges">
+                <div class="university-badge">
+                    <i class="fas fa-university university-logo"></i>
+                    <span class="university-name">МФТИ</span>
+                </div>
+                <div class="university-badge">
+                    <i class="fas fa-university university-logo"></i>
+                    <span class="university-name">МГУ</span>
+                </div>
+                <div class="university-badge">
+                    <i class="fas fa-university university-logo"></i>
+                    <span class="university-name">ПМГМУ</span>
+                </div>
+                <div class="university-badge" style="background: #f0f4ff;">
+                    <i class="fas fa-plus university-logo"></i>
+                    <span class="university-name">и другие</span>
+                </div>
+            </div>
+            <p style="text-align: center; color: #666; margin-top: 20px; font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> Мы постоянно расширяем список вузов — новые наставники присоединяются регулярно
+            </p>
         </div>
     </section>
 
@@ -1006,26 +1466,9 @@
                         <div class="filter-tag" data-filter="биология">Биология</div>
                         <div class="filter-tag" data-filter="мфти">МФТИ</div>
                         <div class="filter-tag" data-filter="мгу">МГУ</div>
-                        <div class="filter-tag" data-filter="пмгму">ПМГМУ</div>
                         <div class="filter-tag" data-filter="олимпиады">Олимпиады</div>
                         <div class="filter-tag" data-filter="поступление">Поступление</div>
-                    </div>
-                </div>
-                
-                <!-- Advanced Filters -->
-                <div class="advanced-filters">
-                    <div class="filter-group">
-                        <div class="filter-label">Дополнительные направления:</div>
-                        <div class="custom-select">
-                            <select id="advanced-filter">
-                                <option value="all">Все направления</option>
-                                <option value="преподавание">Преподавание</option>
-                                <option value="проектная деятельность">Проектная деятельность</option>
-                                <option value="поступление заграницу">Поступление заграницу</option>
-                                <option value="стартапы">Стартапы</option>
-                                <option value="психология">Психология</option>
-                            </select>
-                        </div>
+                        <div class="filter-tag" data-filter="проекты">Проекты</div>
                     </div>
                 </div>
             </div>
@@ -1051,7 +1494,7 @@
                             <span class="skill-tag">Преподавание</span>
                         </div>
                         <div class="mentor-actions">
-                            <button class="btn btn-outline">Подробнее</button>
+                            <button class="btn btn-mentor">Подробнее</button>
                         </div>
                     </div>
                 </div>
@@ -1073,10 +1516,9 @@
                             <span class="skill-tag">ВСОШ</span>
                             <span class="skill-tag">Олимпиады</span>
                             <span class="skill-tag">Проекты</span>
-                            <span class="skill-tag">Наука</span>
                         </div>
                         <div class="mentor-actions">
-                            <button class="btn btn-outline">Подробнее</button>
+                            <button class="btn btn-mentor">Подробнее</button>
                         </div>
                     </div>
                 </div>
@@ -1091,18 +1533,16 @@
                         <span class="mentor-meta">Выпускник 2024 года</span>
                         <h3 class="mentor-name">Глеб Смирнов</h3>
                         <p class="mentor-achievements">МФТИ, 2 курс | РСОШ по математике</p>
-                        <p class="mentor-description">Проложу тропу неминуемого успеха на пути к осязательным результатам. Балансирование между олимпиадами и ЕГЭ, помощь в ориентировании на рынке ВУЗов.</p>
+                        <p class="mentor-description">Помогу сбалансировать подготовку между олимпиадами и ЕГЭ. Расскажу про поступление в технические вузы. Помогу сориентироваться на рынке ВУЗов.</p>
                         <div class="mentor-skills">
                             <span class="skill-tag">МФТИ</span>
                             <span class="skill-tag">РСОШ</span>
                             <span class="skill-tag">Физика</span>
                             <span class="skill-tag">Математика</span>
                             <span class="skill-tag">ЕГЭ</span>
-                            <span class="skill-tag">Поступление</span>
-
                         </div>
                         <div class="mentor-actions">
-                            <button class="btn btn-outline">Подробнее</button>
+                            <button class="btn btn-mentor">Подробнее</button>
                         </div>
                     </div>
                 </div>
@@ -1116,18 +1556,17 @@
                     <div class="mentor-body">
                         <span class="mentor-meta">Выпускник 2024 года</span>
                         <h3 class="mentor-name">Сергей Кокушев</h3>
-                        <p class="mentor-achievements">МГУ, 2 курс | РСОШ по физике</p>
-                        <p class="mentor-description">Расскажу о поступлении и обучении на Мехмате МГУ. Могу рассказать про мехмат: различия между отделениями и кафедрами, про студенческую жизнь в МГУ.</p>
+                        <p class="mentor-achievements">МГУ, 2 курс | Мехмат</p>
+                        <p class="mentor-description">Расскажу о поступлении и обучении на Мехмате МГУ. Помогу разобраться в различиях между отделениями и кафедрами, расскажу про студенческую жизнь в МГУ.</p>
                         <div class="mentor-skills">
                             <span class="skill-tag">МГУ</span>
                             <span class="skill-tag">Мехмат</span>
-                            <span class="skill-tag">РСОШ</span>
                             <span class="skill-tag">Математика</span>
                             <span class="skill-tag">Поступление</span>
                             <span class="skill-tag">ЕГЭ</span>
                         </div>
                         <div class="mentor-actions">
-                            <button class="btn btn-outline">Подробнее</button>
+                            <button class="btn btn-mentor">Подробнее</button>
                         </div>
                     </div>
                 </div>
@@ -1141,19 +1580,100 @@
                     <div class="mentor-body">
                         <span class="mentor-meta">Выпускница 2024 года</span>
                         <h3 class="mentor-name">Анастасия Кирюшина</h3>
-                        <p class="mentor-achievements">Сеченовский университет 2 курс | Венский главный университет 1 курс</p>
-                        <p class="mentor-description">Помогу определиться с родом деятельности, расскажу про поступление в Австрию. В 11 классе решила уйти из физмата в психологию, подготовилась к ЕГЭ по биологии за 1 год с нуля.</p>
+                        <p class="mentor-achievements">Сеченовский университет, 2 курс | Венский университет</p>
+                        <p class="mentor-description">Помогу определиться с родом деятельности, расскажу про поступление в Австрию. В 11 классе подготовилась к ЕГЭ по биологии за 1 год с нуля и поступила на бюджет.</p>
                         <div class="mentor-skills">
                             <span class="skill-tag">Биология</span>
                             <span class="skill-tag">Поступление</span>
                             <span class="skill-tag">ПМГМУ</span>
                             <span class="skill-tag">Психология</span>
-                            <span class="skill-tag">Поступление заграницу</span>
-                            <span class="skill-tag">ЕГЭ</span>
+                            <span class="skill-tag">Зарубежное образование</span>
                         </div>
                         <div class="mentor-actions">
-                            <button class="btn btn-outline">Подробнее</button>
+                            <button class="btn btn-mentor">Подробнее</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" style="background: linear-gradient(135deg, #f8f9fc 0%, #eef2ff 100%);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Что ты получишь?</h2>
+                <p class="section-subtitle">
+                    Преимущества программы наставничества для школьников
+                </p>
+            </div>
+            <div class="results-grid">
+                <div class="result-card" style="animation-delay: 0.1s">
+                    <i class="fas fa-bullseye result-icon"></i>
+                    <h3>Чёткий план действий</h3>
+                    <p>Вместе с наставником вы определите конкретные шаги для достижения цели, будь то подготовка к олимпиаде или работа над проектом.</p>
+                </div>
+                <div class="result-card" style="animation-delay: 0.2s">
+                    <i class="fas fa-comments result-icon"></i>
+                    <h3>Ответы на вопросы</h3>
+                    <p>Получишь ответы от тех, кто недавно прошёл тот же путь: от выбора вуза до нюансов студенческой жизни.</p>
+                </div>
+                <div class="result-card" style="animation-delay: 0.3s">
+                    <i class="fas fa-chart-line result-icon"></i>
+                    <h3>Экономия времени</h3>
+                    <p>Избежишь типичных ошибок и сосредоточишься на том, что действительно важно для достижения результата.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; font-style: italic; color: #666;">
+                <p><i class="fas fa-seedling"></i> Программа только запускается — стань одним из первых участников!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Частые вопросы</h2>
+                <p class="section-subtitle">
+                    Ответы на самые популярные вопросы о программе
+                </p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Это действительно бесплатно?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, программа полностью бесплатна для всех участников. Наставники участвуют на добровольной основе, чтобы помочь следующим поколениям учеников своей школы.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Сколько времени нужно уделять?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Это гибко. Вы можете договориться о разовой консультации или регулярных встречах (например, 1-2 раза в месяц). Всё зависит от ваших целей и возможностей.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Как выбрать наставника?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ориентируйтесь на специализацию наставника (олимпиады, проекты, поступление) и его вуз. Если сомневаетесь — напишите нам, мы поможем подобрать подходящего наставника.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Что если я не знаю, чего хочу?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Это нормально! Наставники могут помочь с профориентацией, рассказать о разных вузах и специальностях. Начните с простого разговора — это уже поможет определиться.</p>
                     </div>
                 </div>
             </div>
@@ -1165,14 +1685,21 @@
         <div class="cta-background"></div>
         <div class="container">
             <div class="cta-content">
-                <h2 class="cta-title">Нашли подходящего наставника?</h2>
+                <h2 class="cta-title">Готов начать?</h2>
                 <p class="cta-description">
-                    Используйте школьную почту для заполнения формы регистрации 
-                    и начните свой путь к успеху вместе с опытными наставниками.
+                    Выбери наставника и сделай первый шаг к своей цели. Используй школьную почту для регистрации.
                 </p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScgTv7MvO2sMWHkAZbLVwoeFf9FxgukMqgrh5VYqX_2vM0kqQ/viewform?usp=dialog" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i> Зарегистрироваться
-                </a>
+                <div class="action-buttons">
+                    <a href="#mentors" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Смотреть наставников
+                    </a>
+                    <a href="https://forms.yandex.ru/u/6968cb516d2d73001c0b6180" target="_blank" class="btn btn-outline">
+                        <i class="fas fa-edit"></i> Найти своего наставника
+                    </a>
+                </div>
+                <p style="margin-top: 30px; opacity: 0.9;">
+                    <i class="fas fa-clock"></i> Обычно отвечаем в течение 1-2 дней
+                </p>
             </div>
         </div>
     </section>
@@ -1210,7 +1737,7 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 40px;">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScYOd8QYw7TpjeK7NYpweIRX1vZU4Jv1uejmgbe3RUZOgpzpg/viewform?usp=dialog" target="_blank" class="btn">
+                <a href="https://forms.yandex.ru/u/6968baa290290283f949f588" target="_blank" class="btn btn-register">
                     <i class="fas fa-user-plus"></i> Стать наставником
                 </a>
             </div>
@@ -1227,13 +1754,16 @@
                     </div>
                     <div class="logo-text">Alumni Connect</div>
                     <p>Программа наставничества, объединяющая выпускников и учеников для достижения академических успехов и профессионального роста.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #aaa;">
+                        <i class="fas fa-school"></i> Для учеников нашей школы
+                    </p>
                 </div>
                 <div>
                     <h3>Контакты</h3>
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fab fa-telegram contact-icon"></i>
-                            <a href="https://t.me/mentor_at_school" style="color: #ccc;">@mentor_at_school</a>
+                            <a href="https://t.me/mentor_at_school" target="_blank" style="color: #ccc;">@mentor_at_school</a>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope contact-icon"></i>
@@ -1242,10 +1772,10 @@
                     </div>
                     
                     <div class="partners-section">
-                        <h4>Партнеры</h4>
+                        <h4>Для школы</h4>
                         <p style="color: #ccc; font-size: 0.9rem; margin-top: 10px;">
-                            Мы открыты для сотрудничества! Если хотите стать партнером программы, 
-                            <a href="mailto:kozminyhv24@sch57.ru" style="color: var(--accent); text-decoration: underline;">напишите нам</a>.
+                            Мы открыты для сотрудничества с администрацией школы. 
+                            <a href="mailto:kozminyhv24@sch57.ru" style="color: var(--accent); text-decoration: underline;">Напишите нам</a>.
                         </p>
                     </div>
                 </div>
@@ -1280,7 +1810,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="modalMentorDetails">
+                    <div class="modal-details-content" id="modalMentorDetails">
                         <!-- Detailed content will be inserted here -->
                     </div>
                 </div>
@@ -1289,8 +1819,13 @@
                     <div class="form-notice">
                         <p><strong>Важно:</strong> Для регистрации используйте школьную почту, чтобы мы могли проверить вашу принадлежность к школе и обеспечить безопасность программы.</p>
                     </div>
-                    <div class="google-form-container">
-                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScgTv7MvO2sMWHkAZbLVwoeFf9FxgukMqgrh5VYqX_2vM0kqQ/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+                    <div style="text-align: center; margin-top: 10px;">
+                        <a href="https://forms.yandex.ru/u/6968cb516d2d73001c0b6180" target="_blank" class="btn btn-register modal-register-btn">
+                            <i class="fas fa-user-plus"></i> Зарегистрироваться
+                        </a>
+                        <p style="margin-top: 15px; color: #666; font-size: 0.9rem;">
+                            Нажмите кнопку выше, чтобы открыть форму регистрации в новой вкладке
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1301,7 +1836,6 @@
         // Простая фильтрация менторов
         document.addEventListener('DOMContentLoaded', function() {
             const filterTags = document.querySelectorAll('.filter-tag');
-            const advancedFilter = document.getElementById('advanced-filter');
             const mentorCards = document.querySelectorAll('.mentor-card');
             
             // Функция для фильтрации карточек
@@ -1310,8 +1844,6 @@
                     .filter(tag => tag.classList.contains('active'))
                     .map(tag => tag.getAttribute('data-filter'));
                 
-                const advancedValue = advancedFilter.value;
-                
                 mentorCards.forEach(card => {
                     const skills = card.getAttribute('data-skills');
                     let shouldShow = true;
@@ -1319,11 +1851,6 @@
                     // Проверяем основные теги
                     if (!activeTags.includes('all') && activeTags.length > 0) {
                         shouldShow = activeTags.some(tag => skills.includes(tag));
-                    }
-                    
-                    // Проверяем расширенный фильтр
-                    if (shouldShow && advancedValue !== 'all') {
-                        shouldShow = skills.includes(advancedValue);
                     }
                     
                     card.style.display = shouldShow ? 'flex' : 'none';
@@ -1346,9 +1873,6 @@
                 });
             });
             
-            // Обработчик для расширенного фильтра
-            advancedFilter.addEventListener('change', filterMentors);
-            
             // Открытие модального окна при клике на карточку ментора
             mentorCards.forEach(card => {
                 card.addEventListener('click', function(e) {
@@ -1369,6 +1893,43 @@
                     openMentorModal(mentorId);
                 });
             });
+            
+            // FAQ Accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    faqItem.classList.toggle('active');
+                    
+                    // Закрываем другие открытые вопросы
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        if (item !== faqItem && item.classList.contains('active')) {
+                            item.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Анимация появления при скролле
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Наблюдаем за всеми карточками с анимацией
+            document.querySelectorAll('.card, .step-card, .result-card').forEach((card, index) => {
+                card.style.animationDelay = `${(index % 3) * 0.1 + 0.1}s`;
+                observer.observe(card);
+            });
         });
 
         // Данные для модальных окон менторов
@@ -1378,7 +1939,7 @@
                 image: "https://systematika.org/wp-content/uploads/2025/05/photo_2025-04-22_16-58-39.jpg",
                 status: "open",
                 bio: "Студент МФТИ, специализируюсь на физике. В школе активно участвовал в олимпиадах и знаю, как готовиться к ним. Преподавал практическую и теоретическую физику на выездных сборах, проверял регион по физике.",
-                skills: ["Физика", "РСОШ", "МФТИ", "Поступление", "ЕГЭ", "РСОШ", "Стартап", "Педагогика"],
+                skills: ["Физика", "РСОШ", "МФТИ", "Поступление", "Преподавание", "Стартапы"],
                 details: `
                     <h3>Подробнее о моей помощи:</h3>
                     <ul>
@@ -1389,7 +1950,7 @@
                         <li>Если у вас есть идеи по развитию этого проекта или другие идеи для стартапов, всегда можем обсудить</li>
                         <li>Расскажу, что такое акселераторы и как в них может попасть даже школьный проект</li>
                     </ul>
-                    <p>Предлагаю встречи раз в месяц по Zoom или лично в Москве (по договоренности). Также доступен для вопросов в Telegram</p>
+                    <p><strong>Формат:</strong> Встречи раз в месяц по Zoom или лично в Москве (по договоренности). Также доступен для вопросов в Telegram</p>
                 `
             },
             mentor2: {
@@ -1397,7 +1958,7 @@
                 image: "https://sun9-69.userapi.com/s/v1/ig2/qKJOujnzVw4DUDxZnZTYSj-wXMfWA606ud0k7MKOsqun8MrDA1AwkQsEI_kZZgmM_qNgh8Mj4W4yC9onU-RLm91u.jpg?quality=96&as=32x35,48x53,72x80,108x120,160x177,240x266,360x399,480x532,540x599,640x710,695x771&from=bu&cs=695x0",
                 status: "open",
                 bio: "Студентка 2-го курса МФТИ ЛФИ, занимаюсь теорфизикой. В школе активно участвовала в олимпиадах, после — преподавала физику на летних олимпиадных школах. Помогу с исследовательскими проектами и расскажу о Физтехе.",
-                skills: ["МФТИ", "Физика", "ВСОШ", "Проектная деятельность", "ВСОШ"],
+                skills: ["МФТИ", "Физика", "ВСОШ", "Проектная деятельность", "Олимпиады"],
                 details: `
                     <h3>Подробнее о моей помощи:</h3>
                     <ul>
@@ -1407,13 +1968,13 @@
                     </ul>
                     <h4>Для желающих заняться объемной проектной задачей предлагаю темы:</h4>
                     <ul>
-                        <li><strong>I. Изучение влияния других планет Солнечной Системы на траекторию Меркурия в классической модели.</strong><br>
-                            <em>To be studied:</em> основы небесной механики и теории возмущений, моделирование на python движения планет в классической модели.</li>
-                        <li><strong>II. Изучение влияния кривизны пространства на траекторию Меркурия в рамках общей теории относительности (ОТО) Эйнштейна.</strong><br>
-                            <em>To be studied</em> основы специальной теории относительности (СТО), задача Кеплера в СТО и ОТО, моделирование на python движения планет в рамках ОТО.</li>
+                        <li><strong>Изучение влияния других планет Солнечной Системы на траекторию Меркурия в классической модели.</strong><br>
+                            <em>Что будем изучать:</em> основы небесной механики и теории возмущений, моделирование на python движения планет в классической модели.</li>
+                        <li><strong>Изучение влияния кривизны пространства на траекторию Меркурия в рамках общей теории относительности (ОТО) Эйнштейна.</strong><br>
+                            <em>Что будем изучать:</em> основы специальной теории относительности (СТО), задача Кеплера в СТО и ОТО, моделирование на python движения планет в рамках ОТО.</li>
                     </ul>
                     <p><em>Список тем будет пополняться</em></p>
-                    <p>По вопросам школьной/олимпиадной физики и поступления предлагаю встречи раз в месяц в Zoom. В рамках проектной деятельности предлагаю встречи раз в 1-2 недели в Zoom.<br>Также для вопросов доступна в Telegram.</p>
+                    <p><strong>Формат:</strong> По вопросам школьной/олимпиадной физики и поступления предлагаю встречи раз в месяц в Zoom. В рамках проектной деятельности предлагаю встречи раз в 1-2 недели в Zoom.<br>Также для вопросов доступна в Telegram.</p>
                 `
             },
             mentor3: {
@@ -1421,14 +1982,15 @@
                 image: "https://sun9-74.userapi.com/s/v1/ig2/HU3a9kmzes_pK_aAxSnU9-7SRrb1W15IZhZW9GhkjDsxdvbCtEUJ816rGmrXelnjtBYoh5x1pjwyaaSJV6pHG5NF.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x319,360x479,480x639,540x718,640x852,720x958,962x1280&from=bu&cs=962x0",
                 status: "open",
                 bio: "Студент МФТИ. В школе активно участвовал в олимпиадах и знаю, как готовиться к ним.",
-                skills: ["Физика", "Математика", "РСОШ", "МФТИ", "ЕГЭ"],
+                skills: ["Физика", "Математика", "РСОШ", "МФТИ", "ЕГЭ", "Поступление"],
                 details: `
                     <h3>Подробнее о моей помощи:</h3>
                     <ul>
                         <li>Помогу сбалансировать подготовку между олимпиадами и ЕГЭ</li>
                         <li>Помогу сориентироваться на рынке ВУЗов</li>
+                        <li>Расскажу о поступлении в технические вузы</li>
                     </ul>
-                    <p>Предлагаю встречи раз в месяц по Zoom. Также доступен для вопросов в Telegram</p>
+                    <p><strong>Формат:</strong> Встречи раз в месяц по Zoom. Также доступен для вопросов в Telegram</p>
                 `
             },
             mentor4: {
@@ -1436,14 +1998,15 @@
                 image: "https://psv4.userapi.com/s/v1/d2/sqH5wbHpi3-cukDf2Nsnnjc_-AGp6OE8C7dYKxRxKRU-pTbzqSJnS-3T_ak4bnyRX3p7HyQv-d4Oef4771mnASLvnu5V8M58lPYTSuJYoaYdJg3QG0gH_YSfLSVd3QM1BjZ7Dsg1kge9/Kok.jpg",
                 status: "open",
                 bio: "Студент МГУ. В школе активно участвовал в олимпиадах и знаю, как готовиться к ним.",
-                skills: ["МГУ", "Мехмат", "Математика", "Поступление", "Физика", "ЕГЭ", "РСОШ"],
+                skills: ["МГУ", "Мехмат", "Математика", "Поступление", "ЕГЭ"],
                 details: `
                     <h3>Подробнее о моей помощи:</h3>
                     <ul>
                         <li>Расскажу про мехмат: различия между отделениями и кафедрами</li>
                         <li>Поделюсь информацией о студенческой жизни в МГУ</li>
+                        <li>Помогу с подготовкой к поступлению на мехмат</li>
                     </ul>
-                    <p>Предлагаю встречи раз в месяц по Zoom. Также доступен для вопросов в Telegram</p>
+                    <p><strong>Формат:</strong> Встречи раз в месяц по Zoom. Также доступен для вопросов в Telegram</p>
                 `
             },
             mentor5: {
@@ -1451,7 +2014,7 @@
                 image: "https://sun9-54.userapi.com/s/v1/ig2/K9rgGRxOVa9XPrqm-ojCvW1HJjlYVZlP8e6PidFZ3sLgmVlgRx2K79cPiS_xaJIBEnYoo-P79ZACxNceEWcb69n4.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640&from=bu&cs=640x0",
                 status: "open",
                 bio: "В данный момент учусь в Австрии, Вена. В 11 классе решила уйти из физмата в психологию, подготовилась к ЕГЭ по биологии за 1 год с нуля и поступила в Сеченовский университет на бюджет. Одновременно с этим начала свой путь поступления заграницу и изучением немецкого.",
-                skills: ["Биология", "Поступление", "ПМГМУ", "Психология", "Австрия", "Поступление заграницу"],
+                skills: ["Биология", "Поступление", "ПМГМУ", "Психология", "Зарубежное образование"],
                 details: `
                     <h3>Подробнее о моей помощи:</h3>
                     <ul>
@@ -1460,7 +2023,7 @@
                         <li>Поделюсь способами, как совместить несовместимое</li>
                         <li>Расскажу подробнее, как устроена психологическая практика в России и какой вуз лучше выбрать для ваших целей</li>
                     </ul>
-                    <p>Предлагаю встречи раз в месяц по Zoom. Также доступна для вопросов в Telegram</p>
+                    <p><strong>Формат:</strong> Встречи раз в месяц по Zoom. Также доступна для вопросов в Telegram</p>
                 `
             }
         };
@@ -1485,6 +2048,7 @@
             });
             
             document.getElementById('modalMentorDetails').innerHTML = mentor.details;
+            
             document.getElementById('mentorModal').style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
@@ -1497,6 +2061,7 @@
         // Close modal when clicking outside
         window.addEventListener('click', function(event) {
             const mentorModal = document.getElementById('mentorModal');
+            
             if (event.target === mentorModal) {
                 closeMentorModal();
             }
